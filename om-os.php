@@ -27,37 +27,19 @@
 </section>
 
 <!-- Flow & Effekt -->
+
+
+<!-- Mission & Vision -->
 <section class="about">
   <div class="container">
     <div class="about-grid">
       <article>
         <h2>Flow</h2>
-        <p class="prose">Flow er følelsen af, at alt glider. For jer betyder det klare rammer, en enkel proces og løsninger der er lette at vedligeholde. Vi arbejder mobile-first, med semantisk HTML og modulær CSS for at reducere kompleksitet.</p>
+        <p class="prose">Flow er når tingene kører nemt. For dig betyder det en klar plan, simple processer og løsninger, der er lette at bruge og vedligeholde.</p>
       </article>
       <article>
         <h2>Effekt</h2>
-        <p class="prose">Effekt er det målbare udbytte: hurtigere websites, bedre synlighed og flere henvendelser. Vi prioriterer performance, tilgængelighed og klare KPI’er fremfor pynt og plugins.</p>
-      </article>
-    </div>
-  </div>
-</section>
-
-<!-- Mission & Vision -->
-<section>
-  <div class="container cards">
-    <h2>Mission &amp; vision</h2>
-    <div class="grid-3">
-      <article class="card">
-        <h3><svg viewBox="0 0 24 24" aria-hidden="true" style="width:18px;height:18px;vertical-align:-3px;margin-right:.4rem"><path fill="currentColor" d="M12 2l3 6 6 .9-4.5 4.3 1.1 6.5L12 16l-5.6 3.7 1.1-6.5L3 8.9 9 8z"/></svg>Mission</h3>
-        <p class="muted">At bygge skarpe, hurtige og tilgængelige løsninger der skaber reel værdi for både brugere og forretning.</p>
-      </article>
-      <article class="card">
-        <h3><svg viewBox="0 0 24 24" aria-hidden="true" style="width:18px;height:18px;vertical-align:-3px;margin-right:.4rem"><path fill="currentColor" d="M12 4a9 9 0 019 9H3a9 9 0 019-9zm0 3a6 6 0 00-5.3 3h10.6A6 6 0 0012 7z"/></svg>Vision</h3>
-        <p class="muted">At være det lille bureau, der føles som en udvidelse af jeres team: enkel proces, gode beslutninger, stærke resultater.</p>
-      </article>
-      <article class="card">
-        <h3><svg viewBox="0 0 24 24" aria-hidden="true" style="width:18px;height:18px;vertical-align:-3px;margin-right:.4rem"><path fill="currentColor" d="M3 12h6l2-3 4 7 2-3h4v2h-3l-3 5-4-7-1 1H3z"/></svg>Hvordan</h3>
-        <p class="muted">Strategi &rarr; designsystem &rarr; udvikling &rarr; måling. Vi skærer støj fra og fokuserer på det, der gør en forskel.</p>
+        <p class="prose">Effekt er det, du får ud af samarbejdet: hurtigere hjemmesider, bedre synlighed og flere henvendelser. Vi prioriterer resultater og brugervenlighed frem for pynt.</p>
       </article>
     </div>
   </div>
@@ -131,22 +113,22 @@
       <article class="team-card">
         <img class="avatar" src="/assets/img/team/Lucas-schuldt.jpg" alt="Lucas" loading="lazy" decoding="async">
         <h3 class="name">Lucas</h3>
-        <p class="role">Webudvikler &amp; video</p>
-        <p class="bio">Bygger hurtige websites og producerer videoindhold med fokus på fortælling og ydelse.</p>
+        <p class="role">Art Director &amp; video</p>
+        <p class="bio">Sætter den kreative retning og sikrer, at hvert projekt får et visuelt udtryk der skiller sig ud. Arbejder med idéudvikling, koncept og design, så form og fortælling hænger sammen.</p>
         <a class="btn tiny contact" href="mailto:lucas@floweffekt.dk">lucas@floweffekt.dk</a>
       </article>
       <article class="team-card">
         <img class="avatar" src="/assets/img/team/Hasti-amang.png" alt="Hasti" loading="lazy" decoding="async">
         <h3 class="name">Hasti</h3>
-        <p class="role">Designer &amp; brand</p>
-        <p class="bio">Udvikler identiteter, UI-systemer og visuelle kits til web og sociale medier.</p>
+        <p class="role">Digital Branding Designer &amp; brand</p>
+        <p class="bio">Skaber identiteter og digitale designsystemer, der giver brands en stærk og genkendelig stemme. Arbejder med visuel identitet, UI og content, så udtryk og brand føles helstøbt.</p>
         <a class="btn tiny contact" href="mailto:hasti@floweffekt.dk">hasti@floweffekt.dk</a>
       </article>
       <article class="team-card">
         <img class="avatar" src="/assets/img/team/Gabriel-lausten.png" alt="Gabriel" loading="lazy" decoding="async">
         <h3 class="name">Gabriel</h3>
-        <p class="role">Front‑end &amp; strategi</p>
-        <p class="bio">Semantisk HTML, modulær CSS og performance som KPI – fra idé til implementering.</p>
+        <p class="role">Lead Developer &amp; strategi</p>
+        <p class="bio">Bygger hurtige og stabile websites med fokus på performance og struktur. Sørger for at teknikken spiller, og at løsningerne er fleksible, tilgængelige og lette at videreudvikle.</p>
         <a class="btn tiny contact" href="mailto:gabriel@floweffekt.dk">gabriel@floweffekt.dk</a>
       </article>
     </div>

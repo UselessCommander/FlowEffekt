@@ -52,7 +52,7 @@
       <!-- Visual: Pakker -->
       <div class="grid-3 cards pricing">
         <article class="card price-card">
-          <h3>SnapFlow</h3>
+          <h3>Foto</h3>
           <p class="price">Fra 4.500,-</p>
           <ul class="check">
             <li>30 redigerede billeder i høj opløsning</li>
@@ -65,7 +65,7 @@
 
         <article class="card price-card featured">
           <div class="ribbon">Mest valgt</div>
-          <h3>PromoFlow</h3>
+          <h3>Video</h3>
           <p class="price">Fra 7.500,-</p>
           <ul class="check">
             <li>1 video (op til 60 sek.)</li>
@@ -77,7 +77,7 @@
         </article>
 
         <article class="card price-card">
-          <h3>CineFlow</h3>
+          <h3>Video Pro</h3>
           <p class="price">Fra 12.500,-</p>
           <ul class="check">
             <li>2 videoer (op til 60 sek.) i 2 formater</li>
