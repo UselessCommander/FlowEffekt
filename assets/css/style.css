@@ -175,7 +175,8 @@ h3{
   left: 0;
   right: 0;
   height: var(--header-h);
-  z-index: 1000;
+  z-index: 2000;
+  isolation:isolate;
 
   background:color-mix(in oklab, var(--secondary-bg) 78%, transparent);
   backdrop-filter:blur(10px);
@@ -206,58 +207,93 @@ h3{
   background:var(--secondary-bg);
   padding:.5rem;
   border-radius:.75rem;
+  position:relative;
+  z-index: 2500;
 }
 .burger span{
   width:22px;
   height:2px;
   background:var(--text-dark);
   display:block;
+  transition: transform .25s ease, opacity .2s ease; /* animate */
+  transform-origin: center;                               /* rotate nicely */
 }
 
+/* Burger → X when open */
+.burger[aria-expanded="true"] span:nth-child(1){ transform: translateY(6px) rotate(45deg); }
+.burger[aria-expanded="true"] span:nth-child(2){ opacity: 0; }
+.burger[aria-expanded="true"] span:nth-child(3){ transform: translateY(-6px) rotate(-45deg); }
+
+/* ===== NAV (desktop-first) ===== */
 .nav{
-  position:fixed;
-  top:var(--header-h);
-  right:0;
-  display:none;
-  flex-direction:column;
-  gap:.75rem;
-  background:var(--secondary-bg);
-  border-left:1px solid var(--outline);
-  padding:1rem;
-  width:min(80vw,320px);
-  height:calc(100dvh - var(--header-h));
+  /* Desktop defaults (unchanged look) */
+  display:flex;
+  position:static;
+  width:auto; height:auto;
+  flex-direction:row;
+  gap:.5rem;
+  padding:0; border:0; background:transparent;
 }
 .nav a{
   position:relative;
-  padding:.55rem .85rem;
-  border-radius:.7rem;
-  border:1px solid transparent;
+  padding:.55rem .85rem; border-radius:.7rem; border:1px solid transparent;
   transition:background .2s,color .2s;
 }
-.nav a:hover{
-  background:color-mix(in oklab, var(--card-bg) 75%, transparent);
-}
-.nav a.active{
-  border-color:var(--outline);
-}
+.nav a:hover{ background:color-mix(in oklab, var(--card-bg) 75%, transparent); }
+.nav a.active{ border-color:var(--outline); }
 .nav a::after{
-  content:"";
-  position:absolute;
-  left:.8rem;
-  right:.8rem;
-  bottom:.35rem;
-  height:2px;
-  border-radius:2px;
-  background:var(--cta-color);
-  transform:scaleX(0);
-  transform-origin:left;
-  transition:transform .25s;
+  content:""; position:absolute; left:.8rem; right:.8rem; bottom:.35rem; height:2px; border-radius:2px;
+  background:var(--cta-color); transform:scaleX(0); transform-origin:left; transition:transform .25s;
 }
-.nav a.active::after{
-  transform:scaleX(1);
-}
-.nav.open{
-  display:flex;
+.nav a.active::after{ transform:scaleX(1); }
+
+/* Mobile: off-canvas drawer */
+@media (max-width: 899px){
+  .nav{
+    position:fixed; top:0; right:0;
+    display:flex; flex-direction:column; gap:.75rem;
+    background:var(--secondary-bg);
+    border-left:1px solid var(--outline);
+    padding:1rem;
+    width:min(82vw, 340px);
+    height:100dvh; height:100svh;
+    transform: translateX(100%);
+    transition: transform .28s ease; will-change: transform;
+    box-shadow:none; z-index:1100;
+    justify-content:center;
+    padding-top: calc(var(--header-h) + 12px);
+  }
+  .nav.open{ transform: translateX(0); box-shadow: -22px 0 60px rgba(0,0,0,.18); }
+
+  /* Staggered link animation inside drawer */
+  .nav a{ opacity: 0; transform: translateX(12px); transition: opacity .28s ease, transform .28s ease; }
+  .nav.open a{ opacity: 1; transform: none; }
+
+  /* simple stagger using nth-child */
+  .nav.open a:nth-child(1){ transition-delay: .04s; }
+  .nav.open a:nth-child(2){ transition-delay: .08s; }
+  .nav.open a:nth-child(3){ transition-delay: .12s; }
+  .nav.open a:nth-child(4){ transition-delay: .16s; }
+  .nav.open a:nth-child(5){ transition-delay: .20s; }
+
+  @keyframes drawer-in {
+    0%   { transform: translateX(100%); }
+    80%  { transform: translateX(-2%); }
+    100% { transform: translateX(0); }
+  }
+  .nav.open{ animation: drawer-in .32s ease both; }
+
+  /* Backdrop behind mobile nav */
+  .nav-backdrop{ position: fixed; inset: 0; z-index: 1050; background: rgba(0,0,0,.0); border:0; margin:0; padding:0; opacity:0; pointer-events:none; transition: background .28s ease, opacity .28s ease; }
+  .nav-backdrop.show{ opacity:1; pointer-events:auto; background: rgba(0,0,0,.35); }
+
+  /* Lock scroll when menu is open */
+  body.menu-open{ overflow:hidden; }
+
+  .nav a{ display:block; font-size: clamp(1.15rem, 3.6vw, 1.35rem); padding: .85rem 1rem; }
+  @media (prefers-reduced-motion: reduce){
+    .nav, .nav a{ transition: none !important; animation: none !important; }
+  }
 }
 
 /* THEME TOGGLE — fix sort tekst i dark mode */
@@ -287,17 +323,7 @@ h3{
   .burger{
     display:none;
   }
-  .nav{
-    display:flex !important;
-    position:static;
-    width:auto;
-    height:auto;
-    flex-direction:row;
-    gap:.5rem;
-    padding:0;
-    border:0;
-    background:transparent;
-  }
+  /* .nav override removed - desktop is now the default */
 }
 
 /* ========= Buttons & UI ========= */
@@ -479,6 +505,27 @@ h3{
   color:var(--cta-color);
 }
 
+/* Case hero spacing & centering */
+.case-hero{
+  padding-block: clamp(20px, 4vw, 48px);
+}
+.case-hero .container{
+  display: grid;
+  place-items: center;
+}
+
+/* Case hero billeder */
+.case-hero img{
+  width: 100%;
+  display: block;
+  border-radius: 16px;
+  aspect-ratio: 16/9;
+  object-fit: contain; /* vis hele billedet, undgå beskæring */
+  background: color-mix(in oklab, var(--secondary-bg) 96%, transparent);
+  object-position: center;    /* sikker centrering */
+  margin-top: .25rem;         /* lille visuelt åndehul fra header */
+}
+
 .case-list .list{
   display:grid;
   gap:.9rem;
@@ -575,45 +622,144 @@ h3{
 }
 
 /* ========= Footer ========= */
-.fe-footer{
-  border-top:1px solid color-mix(in oklab, var(--outline) 85%, transparent);
-  background:linear-gradient(180deg, var(--secondary-bg), color-mix(in oklab, var(--secondary-bg) 85%, transparent));
-  margin-top:1.2rem;
+/* ===== Footer (desktop/PC-agtig) ===== */
+.fe-footer {
+  position: relative;
+  border-top: 1px solid color-mix(in oklab, var(--outline) 85%, transparent);
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklab, var(--secondary-bg) 96%, transparent),
+    color-mix(in oklab, var(--secondary-bg) 85%, transparent)
+  );
+  margin-top: 1.2rem;
 }
-.footer-inner{
-  display:grid;
-  gap:1rem;
-  padding:clamp(16px,3vw,28px) 1rem;
+
+/* lille “glød” i top, giver OS/glas-fornemmelse */
+.fe-footer::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    color-mix(in oklab, var(--cta-color) 65%, transparent),
+    transparent 35%,
+    transparent 65%,
+    color-mix(in oklab, var(--cta-color) 65%, transparent)
+  );
+  opacity: .25;
+  pointer-events: none;
 }
-.footer-brand p{
-  color:var(--text-light);
-  margin-top:.2rem;
+
+.footer-inner {
+  display: grid;
+  gap: 1.2rem;
+  padding: clamp(20px, 3vw, 32px) 1rem;
+  grid-template-areas:
+    "brand"
+    "apps"
+    "actions"
+    "bottom";
 }
-.footer-links{
-  display:flex;
-  gap:1rem;
-  flex-wrap:wrap;
+
+/* Brand venstre */
+.footer-brand {
+  grid-area: brand;
 }
-.footer-links a{
-  opacity:.9;
-  transition:opacity .2s, color .2s;
+.footer-brand p {
+  color: var(--text-light);
+  margin-top: .2rem;
 }
-.footer-links a:hover{
-  opacity:1;
-  color:var(--cta-color);
+
+/* App-dock i midten */
+.footer-apps {
+  grid-area: apps;
+  display: flex;
+  gap: .6rem;
+  flex-wrap: wrap;
 }
-.footer-copy{
-  color:var(--muted);
-  font-size:.9rem;
+
+/* hver “app” (link) */
+.app-link {
+  display: inline-flex;
+  align-items: center;
+  gap: .6rem;
+  padding: .55rem .8rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in oklab, var(--outline) 85%, transparent);
+  background: color-mix(in oklab, var(--card-bg) 55%, transparent);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.06) inset,
+    0 8px 18px rgba(0,0,0,.08);
+  text-decoration: none;
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
 }
-@media (min-width:900px){
-  .footer-inner{
-    grid-template-columns:1fr 1fr;
-    align-items:center;
-  }
-  .footer-copy{
-    grid-column:1 / -1;
-    justify-self:center;
+.app-link:hover {
+  transform: translateY(-1px);
+  border-color: color-mix(in oklab, var(--cta-color) 30%, var(--outline));
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.08) inset,
+    0 14px 28px color-mix(in oklab, var(--cta-color) 16%, transparent);
+}
+
+/* lille “app-ikon” */
+.app-ico {
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  border: 1px solid color-mix(in oklab, var(--outline) 80%, transparent);
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklab, var(--secondary-bg) 88%, transparent),
+    color-mix(in oklab, var(--secondary-bg) 70%, transparent)
+  );
+  box-shadow: 0 1px 0 rgba(255,255,255,.06) inset;
+  font-size: 16px; /* emoji-ikon størrelse */
+}
+
+/* CTA højre */
+.footer-actions {
+  grid-area: actions;
+  display: flex;
+  justify-content: flex-start;
+}
+@media (min-width: 900px) {
+  .footer-actions { justify-content: flex-end; }
+}
+.btn.small {
+  padding: .6rem .9rem;
+  border-radius: .7rem;
+  font-size: .95rem;
+}
+
+/* Bundlinje: copyright + “kbd” hint */
+.footer-bottom {
+  grid-area: bottom;
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  justify-content: space-between;
+  padding-top: .7rem;
+  border-top: 1px dashed color-mix(in oklab, var(--outline) 70%, transparent);
+}
+
+.footer-copy {
+  color: var(--muted);
+  font-size: .9rem;
+}
+
+/* Desktop layout: brand | apps | actions  +  bundlinje på tværs */
+@media (min-width: 900px) {
+  .footer-inner {
+    grid-template-columns: 1fr auto auto;
+    grid-template-areas:
+      "brand apps actions"
+      "bottom bottom bottom";
+    align-items: center;
   }
 }
 
@@ -635,55 +781,61 @@ h3{
   color:var(--muted);
 }
 
-/* ===== Marquee logo strip ===== */
-.marquee{
-  padding-block:clamp(10px,2.2vw,20px);
+/* ===== Logo marquee (absolute belt, no layout blowout) ===== */
+.marquee {
+  padding-block: clamp(10px, 2.2vw, 20px);
 }
+
 .marquee-viewport{
-  --gap:clamp(1rem,3vw,2rem);
-  position:relative;
-  overflow:hidden;
-  display:block;
-  mask-image:linear-gradient(to right, transparent 0, #000 6%, #000 94%, transparent 100%);
-  -webkit-mask-image:linear-gradient(to right, transparent 0, #000 6%, #000 94%, transparent 100%);
+  --gap: clamp(1rem, 3vw, 2rem);
+  --logo-h: 24px;              /* mobile logo height */
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: calc(var(--logo-h)); /* because the belt is absolute */
+  mask-image: linear-gradient(to right, transparent 0, #000 6%, #000 94%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 6%, #000 94%, transparent 100%);
 }
-.marquee-track{
-  display:flex;
-  align-items:center;
-  gap:var(--gap);
-  list-style:none;
-  margin:0;
-  padding:0;
-  min-width:max-content;
-  will-change:transform;
-  transform:translateX(100vw);
+
+@media (min-width: 900px){
+  .marquee-viewport{ --logo-h: 28px; }
 }
-.marquee-track li{
-  display:flex;
-  align-items:center;
+
+/* The moving belt */
+.marquee-viewport .marquee-track{
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translate3d(0, -50%, 0); /* JS will update X while keeping Y */
+  display: inline-flex;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  gap: var(--gap);
+  white-space: nowrap;
+  min-width: max-content;
+  will-change: transform;
 }
-.marquee-track img{
-  height:24px;
-  max-width:160px;
-  object-fit:contain;
-  opacity:.85;
-  filter:grayscale(100%);
-  transition:opacity .2s, filter .2s, transform .2s;
+
+/* items must never grow */
+.marquee-viewport .marquee-track > *{
+  flex: 0 0 auto;
 }
-.marquee-track img:hover{
-  opacity:1;
-  filter:none;
-  transform:translateY(-1px);
+
+.marquee-viewport .marquee-track img{
+  height: var(--logo-h);
+  max-width: 160px;
+  object-fit: contain;
+  opacity: .85;
+  filter: grayscale(100%);
+  transition: opacity .2s, filter .2s, transform .2s;
 }
-@media (min-width:900px){
-  .marquee-track img{
-    height:28px;
-  }
+.marquee-viewport .marquee-track img:hover{
+  opacity: 1; filter: none; transform: translateY(-1px);
 }
-@media (prefers-reduced-motion:reduce){
-  .marquee-track{
-    transform:none !important;
-  }
+
+@media (prefers-reduced-motion: reduce){
+  .marquee-viewport .marquee-track{ transform: translate3d(0, -50%, 0) !important; }
 }
 
 /* Cases med KPI-badge */
@@ -746,8 +898,7 @@ h3{
   border-radius:50%;
   object-fit:cover;
 }
-
-/* FAQ */
+/* FAQ (animated open/close) */
 .faq details{
   background:var(--secondary-bg);
   border:1px solid var(--outline);
@@ -755,7 +906,17 @@ h3{
   padding:.7rem .85rem;
   margin-bottom:.6rem;
   box-shadow:var(--shadow);
+
+  /* animation layout */
+  display:grid;
+  grid-template-rows:auto 0fr; /* summary + collapsed body */
+  transition:grid-template-rows .28s ease;
+  overflow:hidden; /* hide body while animating */
 }
+.faq details[open]{
+  grid-template-rows:auto 1fr; /* expand body */
+}
+
 .faq summary{
   cursor:pointer;
   list-style:none;
@@ -771,14 +932,26 @@ h3{
   content:"▾";
   margin-left:auto;
   color:var(--text-light);
-  transition:transform .2s;
+  transition:transform .2s ease;
 }
 .faq details[open] summary::after{
   transform:rotate(-180deg);
 }
-.faq details>p{
+
+/* animated body wrapper (auto-injected af JS hvis den mangler) */
+.faq details .faq-body{
+  overflow:hidden; 
+}
+.faq details .faq-body > *{
   margin:.6rem 0 0;
   color:var(--text-light);
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .faq details{
+    transition:none;
+  }
 }
 
 /* Små overskrifts-justeringer */
@@ -962,3 +1135,193 @@ h3{
   padding: .25rem .6rem; border-radius: 999px; font-size: .75rem;
 }
 
+/* ==============================================
+   Responsive helpers: phones & tablets
+   - Mobile-first base is already defined above
+   - These add explicit tweaks for <=719px and 720–1023px
+   ============================================== */
+
+/* Phones (<=719px) */
+@media (max-width: 719px){
+  /* compact hero spacing */
+  .hero{ padding-block: clamp(32px, 8vw, 64px); }
+
+  /* single column everywhere */
+  .feature-grid .grid-3,
+  .cards .grid-3{ grid-template-columns: 1fr; }
+
+  /* keep actions left-aligned on small screens */
+  .footer-actions{ justify-content: flex-start; }
+
+  /* mobile drawer a bit wider and safer height */
+  .nav{ width: min(92vw, 360px); }
+}
+
+/* Tablets (720–1023px) */
+@media (min-width: 720px) and (max-width: 1023px){
+  /* 2 columns on tablet for better readability */
+  .feature-grid .grid-3,
+  .cards .grid-3{ grid-template-columns: repeat(2, 1fr); }
+
+  /* bring split header layout in earlier on tablet */
+  .lead-split{ grid-template-columns: 1.25fr 1fr; }
+}
+
+
+
+/* ===== Team (refined cards) ===== */
+.team-grid{
+  display:grid;
+  gap:.9rem;
+  grid-template-columns:1fr;
+}
+@media (min-width:720px){
+  .team-grid{ grid-template-columns:repeat(3,1fr); }
+}
+.team-card{
+  text-align:center;
+  display:flex;                 /* make vertical flex container */
+  flex-direction:column;        /* stack elements */
+  align-items:center;           /* center content horizontally */
+  justify-content:flex-start;   /* start at top */
+  min-height:100%;              /* stretch to equal height within grid row */
+  padding:clamp(.9rem,2vw,1.2rem);
+  background:linear-gradient(180deg, color-mix(in oklab, var(--secondary-bg) 96%, transparent), var(--secondary-bg));
+  border:1px solid color-mix(in oklab, var(--outline) 88%, transparent);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  transition: transform .22s, box-shadow .22s, border-color .22s, background-color .22s;
+}
+.team-card:hover{
+  transform:translateY(-2px);
+  box-shadow:0 16px 40px rgba(0,0,0,.35);
+  border-color:color-mix(in oklab, var(--outline) 60%, var(--cta-color) 18%);
+}
+.team-card .avatar{
+  width:112px; height:112px;
+  border-radius:50%;
+  object-fit:cover;
+  display:block;
+  margin: .2rem auto .7rem;
+  box-shadow: 0 1px 0 rgba(255,255,255,.06) inset, 0 10px 24px rgba(0,0,0,.25);
+  border:1px solid color-mix(in oklab, var(--outline) 80%, transparent);
+}
+.team-card .name{
+  margin:.1rem 0 0; 
+  font-weight:800;
+  font-family: Montserrat, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+.team-card .role{
+  margin:.2rem 0 .5rem;
+  color:var(--text-light);
+  font-weight:600;
+}
+.team-card .bio{
+  margin:.4rem auto .7rem;
+  color:var(--text-light);
+  max-width: 60ch;
+}
+.team-card .contact{
+  display:inline-flex;
+  align-items:center;
+  gap:.45rem;
+  margin-top:auto;              /* push email button to bottom */
+}
+.team-card .contact::before{
+  content:"✉️";
+  font-size:1rem;
+  line-height:1;
+}
+.btn.tiny{
+  padding:.45rem .7rem;
+  border-radius:.6rem;
+  font-size:.92rem;
+}
+
+
+/* === Custom cursor: dot + ring (global) === */
+@media (pointer:fine){
+  html.custom-cursor body{ cursor: none; }            /* skjul systemcursor */
+  .fe-cursor, .fe-cursor-ring{
+    position: fixed; left: 0; top: 0; z-index: 9999;
+    pointer-events: none; transform: translate(-50%,-50%);
+    will-change: left, top, transform, opacity, scale;
+    transition: opacity .2s ease, transform .2s ease;
+  }
+  .fe-cursor{
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--text-dark); opacity: .95;
+    mix-blend-mode: difference; /* funker i lyst/mørkt */
+  }
+  .fe-cursor-ring{
+    width: 26px; height: 26px; border-radius: 50%;
+    border: 1px solid color-mix(in oklab, var(--cta-color) 70%, transparent);
+    background: color-mix(in oklab, var(--cta-color) 10%, transparent);
+    opacity: .45;
+    transition: transform .18s ease, opacity .18s ease, background .18s ease, border-color .18s ease;
+  }
+
+  /* over klikbare elementer */
+  .cursor-hover .fe-cursor-ring{
+    border-color: var(--cta-color);
+    background: color-mix(in oklab, var(--cta-color) 16%, transparent);
+    opacity: .85; scale: 1.12;
+  }
+
+  /* Lad tekstfelter beholde I-beam */
+  input, textarea, [contenteditable="true"] { cursor: text !important; }
+
+  /* DROP CURSOR — ingen pegefinger på klikbare elementer */
+  a, button, .btn, [role="button"], summary, label {
+    cursor: none !important;
+  }
+}
+
+/* Respectér brugere der ikke vil have animation */
+@media (prefers-reduced-motion: reduce){
+  html.custom-cursor body{ cursor: auto; }
+  .fe-cursor, .fe-cursor-ring{ display:none !important; }
+}
+
+/* Når man peger på klikbart */
+.cursor-hover .fe-cursor-ring {
+  border-color: var(--cta-color);
+  background: color-mix(in oklab, var(--cta-color) 25%, transparent);
+  opacity: .95;
+  scale: 1.3;             /* større ring = pointer */
+  transition: all .15s ease;
+}
+.cursor-hover .fe-cursor {
+  background: var(--cta-color);
+  width: 8px; height: 8px; /* lidt større dot */
+}
+
+/* Light mode: gør dot mørkere og tydeligere */
+html[data-theme="light"] .fe-cursor {
+  background: #111;
+  mix-blend-mode: normal;
+  box-shadow: 0 0 0 1px rgba(0,0,0,.15);
+}
+
+/* Klik-pulse animation */
+@keyframes cursor-click {
+  0%   { transform: translate(-50%,-50%) scale(0.8); opacity:1; }
+  50%  { transform: translate(-50%,-50%) scale(1.3); opacity:.9; }
+  100% { transform: translate(-50%,-50%) scale(1);   opacity:.85; }
+}
+.cursor-click .fe-cursor-ring {
+  animation: cursor-click 0.25s ease;
+}
+
+/* Case sidebar facts: ensure theme-aware background/border/text */
+.case-body aside .card{
+  background: linear-gradient(180deg, color-mix(in oklab, var(--secondary-bg) 96%, transparent), var(--secondary-bg)) !important;
+  border: 1px solid color-mix(in oklab, var(--outline) 88%, transparent) !important;
+  box-shadow: var(--shadow);
+}
+.case-body aside .card h3{
+  color: var(--text-dark);
+}
+.case-body aside .card p{
+  color: var(--text-light);
+}

@@ -9,7 +9,9 @@
 <section class="hero">
   <div class="container hero-inner">
     <h1>Digitale løsninger der skaber <span class="accent">effekt</span></h1>
-    <p class="prose">Web, identitet og video – samlet til ét strømlinet brand. Mobile-first, performance og skalerbarhed som standard.</p>
+    <p class="prose">Vi hjælper dig med at få en flot og nem hjemmeside, stærk branding og billeder/video der fanger.
+      Hos FlowEffekt får du alt samlet ét sted – hjemmesider, identitet og content, som både ser godt ud og virker hurtigt på alle skærme.
+    </p>
     <div class="hero-cta">
       <a class="btn" href="/services.php">Se vores services</a>
       <a class="btn ghost" href="/cases.php">Udforsk cases</a>
@@ -17,21 +19,6 @@
   </div>
 </section>
 
-<!-- Logo strip (social proof) -->
-<section class="logos marquee" aria-label="Kunder vi har arbejdet med">
-  <div class="container">
-    <div class="marquee-viewport" data-marquee>
-      <ul class="marquee-track">
-        <li><img src="/assets/img/logos/brand1.svg" alt="Brand 1" loading="lazy" decoding="async"></li>
-        <li><img src="/assets/img/logos/brand2.svg" alt="Brand 2" loading="lazy" decoding="async"></li>
-        <li><img src="/assets/img/logos/brand3.svg" alt="Brand 3" loading="lazy" decoding="async"></li>
-        <li><img src="/assets/img/logos/brand4.svg" alt="Brand 4" loading="lazy" decoding="async"></li>
-        <li><img src="/assets/img/logos/brand5.svg" alt="Brand 5" loading="lazy" decoding="async"></li>
-        <li><img src="/assets/img/logos/brand6.svg" alt="Brand 6" loading="lazy" decoding="async"></li>
-      </ul>
-    </div>
-  </div>
-</section>
 
 
 
@@ -43,15 +30,15 @@
   <div class="container grid-3">
     <article class="card">
       <h3>Web & Performance</h3>
-      <p>Semantisk HTML, modulær CSS og minimal JS. Vi bygger hurtigt, tilgængeligt og responsivt.</p>
+      <p>Vi bygger hjemmesider der er hurtige og nemme at bruge. De fungerer på mobil, tablet og computer – og er lette at vedligeholde.</p>
     </article>
     <article class="card">
       <h3>Identitet & Design</h3>
-      <p>Visuel identitet, tone-of-voice og designsystemer, der kan vokse med din forretning.</p>
+      <p>Vi hjælper dig med at finde et udtryk, der afspejler dig og din virksomhed. Logo, farver, skrifttyper og stil gør, at dit brand både føles rigtigt for dig og rammer den målgruppe, du vil nå</p>
     </article>
     <article class="card">
       <h3>Video & Content</h3>
-      <p>Stemningsfulde fortællinger og klare budskaber – optimalt klippet til web og SoMe.</p>
+      <p>Vi hjælper dig med at fortælle din historie med billeder og video. Dit indhold bliver professionelt, let at dele og tilpasset web og sociale medier.</p>
     </article>
   </div>
 </section>
@@ -64,24 +51,30 @@
     <h2 id="cases-title">Udvalgte cases</h2>
   </div>
   <div class="container list grid-3">
+    
+  <article class="card case-card kpi">
+    <img src="/assets/img/cases/Vaerdifuldeliv - Macbook Pro.png"
+        alt="Værdifulde Liv – webdesign og WordPress-hjemmeside"
+        loading="lazy" decoding="async">
+    <h3>Værdifulde Liv</h3>
+    <p>Webdesign og WordPress-hjemmeside – enkel, hurtig og let at vedligeholde.</p>
+    <a class="link" href="/cases.php">Se case</a>
+  </article>
     <article class="card case-card kpi">
-      <img src="/assets/img/cases/vaerdifulde-liv.jpg" alt="Værdifulde Liv – website og identitet" loading="lazy" decoding="async">
-      <h3>Værdifulde Liv</h3>
-      <p>Identitet & web. Core Web Vitals: grøn på alle metrics.</p>
+      <img src="/assets/img/cases/Mette - Macbook Pro.png"
+          alt="Sauna Gus Kattinge – website-mockup med ny visuel identitet, foto og video"
+          loading="lazy" decoding="async">
+      <h3>Mette Truesen </h3>
+      <p>Visuel identitet, hjemmeside og content & fotos</p>
       <a class="link" href="/cases.php">Se case</a>
     </article>
 
     <article class="card case-card kpi">
-      <img src="/assets/img/cases/sauna-gus.jpg" alt="Sauna Gus Kattinge – video og content" loading="lazy" decoding="async">
-      <h3>Sauna Gus Kattinge</h3>
-      <p>Sanselig stemningsvideo og brandfortælling med natur i fokus.</p>
-      <a class="link" href="/cases.php">Se case</a>
-    </article>
-
-    <article class="card case-card kpi">
-      <img src="/assets/img/cases/floweffekt-demo.jpg" alt="Performance demo – teknisk optimering" loading="lazy" decoding="async">
-      <h3>Performance demo</h3>
-      <p>Teknisk optimering, caching og billedpipeline – Mobile Vitals i top.</p>
+      <img src="/assets/img/cases/Byggefidus - Macbook Pro.png"
+          alt="Byggefidusen – hjemmeside"
+          loading="lazy" decoding="async">
+      <h3>Byggefidusen</h3>
+      <p>Opbygning og opsætning af hjemmeside.</p>
       <a class="link" href="/cases.php">Se case</a>
     </article>
   </div>
@@ -94,17 +87,17 @@
   </div>
   <div class="container grid-3">
     <article class="card">
-      <h3>Performance først</h3>
+      <h3>Hurtige hjemmesider</h3>
       <ul class="check">
-        <li>Core Web Vitals grønt</li>
-        <li>Hurtig time-to-first-byte</li>
-        <li>Lazy load & billedpipeline</li>
+        <li>Loader hurtigt på mobil og computer</li>
+        <li>SEO-venlige og teknisk optimerede</li>
+        <li>Bedre oplevelse for dine besøgende</li>
       </ul>
     </article>
     <article class="card">
-      <h3>Modulær & skalerbar</h3>
+      <h3>Bygget til at vokse</h3>
       <ul class="check">
-        <li>Semantisk HTML, modulær CSS</li>
+        <li>Fleksibel opbygning så du kan tilføje mere indhold senere</li>
         <li>Minimal JS</li>
         <li>Designsystem der vokser</li>
       </ul>
@@ -145,7 +138,7 @@
   </div>
 </section>
 
-<!-- Testimonials -->
+<!-- Testimonials – midlertidigt skjult
 <section class="testimonials" aria-labelledby="testimonials-title">
   <div class="container">
     <h2 id="testimonials-title">Det siger kunderne</h2>
@@ -165,6 +158,7 @@
     </figure>
   </div>
 </section>
+-->
 
 <!-- CTA-stribe -->
 <section class="stripe cta-stripe" aria-label="Kontakt CTA">
@@ -180,15 +174,21 @@
     <h2 id="faq-title">FAQ</h2>
     <details class="card">
       <summary>Hvad koster et website?</summary>
-      <p>Det afhænger af scope og integrationer. Typisk fra 35–120k DKK. Kontakt os for et fast tilbud.</p>
+      <div class="faq-body">
+        <p>Det afhænger af scope og integrationer. Typisk fra 35–120k DKK. Kontakt os for et fast tilbud.</p>
+      </div>
     </details>
     <details class="card">
       <summary>Arbejder I med WordPress eller custom?</summary>
-      <p>Begge dele. Vi vælger platform ud fra jeres behov – altid med fokus på performance og vedligehold.</p>
+      <div class="faq-body">
+        <p>Begge dele. Vi vælger platform ud fra jeres behov – altid med fokus på performance og vedligehold.</p>
+      </div>
     </details>
     <details class="card">
       <summary>Hvor hurtigt kan I levere?</summary>
-      <p>En mindre corporate side: 3–5 uger. Større sites: 6–10 uger. Tidsplan aftales ved kickoff.</p>
+      <div class="faq-body">
+        <p>En mindre corporate side: 3–5 uger. Større sites: 6–10 uger. Tidsplan aftales ved kickoff.</p>
+      </div>
     </details>
   </div>
 </section>

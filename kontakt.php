@@ -29,7 +29,7 @@
     if (strlen($message) < 10) $errors[] = 'Skriv en kort besked (min. 10 tegn).';
 
     if (!$errors) {
-      $to = 'hello@floweffekt.dk'; // <-- ret til din e-mail
+      $to = 'kontakt@floweffekt.dk'; // <-- ret til din e-mail
       $subject = 'Kontaktformular – FlowEffekt';
       $body = "Navn: {$name}\nE-mail: {$email}\n\nBesked:\n{$message}\n";
       $headers = "From: noreply@floweffekt.dk\r\nReply-To: {$email}\r\nContent-Type: text/plain; charset=UTF-8";
@@ -89,7 +89,7 @@
     <aside class="contact-aside">
       <div class="card">
         <h3>Kontaktoplysninger</h3>
-        <p><strong>E-mail:</strong> hello@floweffekt.dk</p>
+        <p><strong>E-mail:</strong> kontakt@floweffekt.dk</p>
         <p><strong>Lokation:</strong> København, Danmark</p>
       </div>
       <div class="card">

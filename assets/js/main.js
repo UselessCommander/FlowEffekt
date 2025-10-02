@@ -28,107 +28,152 @@
   }
 })();
 
-// ===== Logo marquee: robust JS-loop, starter fra højre =====
+
+// Mobile nav (burger) — slide-in drawer with overlay & a11y
 (function(){
-  const SPEED_MOBILE = 40; // px/sek
-  const SPEED_DESKTOP = 60;
+  const burger = document.querySelector('.burger');
+  const nav = document.getElementById('site-nav');
+  if(!burger || !nav) return;
 
-  const px = v => parseFloat(v) || 0;
+  // Ensure proper ARIA
+  burger.setAttribute('aria-controls','site-nav');
+  burger.setAttribute('aria-expanded','false');
 
-  function measureSingleWidth(track){
-    // mål bredden af første halvdel (første “kopi”) inkl. gap
-    const items = Array.from(track.children);
-    const half = (items.length / 2) | 0;
-    const cs = getComputedStyle(track);
-    const gap = px(cs.gap || cs.columnGap || 0);
-    let w = 0;
-    for (let i = 0; i < half; i++){
-      w += items[i].getBoundingClientRect().width;
-    }
-    if (half > 1) w += gap * (half - 1);
-    // fallback hvis 0
-    return w || (track.scrollWidth / 2) || 1;
+  // Create (or reuse) backdrop overlay
+  let overlay = document.querySelector('.nav-backdrop');
+  if(!overlay){
+    overlay = document.createElement('button');
+    overlay.type = 'button';
+    overlay.className = 'nav-backdrop';
+    overlay.setAttribute('aria-label','Luk menu');
+    document.body.appendChild(overlay);
   }
 
-  function setup(view){
-    const track = view.querySelector('.marquee-track');
-    if (!track) return;
-
-    // Duplikér indhold én gang for sømløst loop
-    if (!track.dataset.duped){
-      track.innerHTML = track.innerHTML + track.innerHTML;
-      track.dataset.duped = '1';
-    }
-
-    let vw = view.getBoundingClientRect().width;
-    let singleW = measureSingleWidth(track);
-    let pos = vw; // start helt ude fra højre
-    let last = performance.now();
-    let running = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    // Hover/focus pause
-    const pause = () => running = false;
-    const play  = () => running = true;
-    view.addEventListener('mouseenter', pause);
-    view.addEventListener('mouseleave', play);
-    view.addEventListener('focusin', pause);
-    view.addEventListener('focusout', play);
-
-    // Opdater singleW når billeder loader (non-blocking)
-    track.querySelectorAll('img').forEach(img => {
-      img.addEventListener('load', () => {
-        singleW = measureSingleWidth(track);
-      }, { once: true });
-    });
-
-    // Reager på ændret reduced-motion
-    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const onRM = () => {
-      running = !mq.matches;
-      if (!running) track.style.transform = ''; // nulstil hvis stoppet
-      else pos = view.getBoundingClientRect().width; // genstart fra højre
-    };
-    mq.addEventListener ? mq.addEventListener('change', onRM) : mq.addListener(onRM);
-
-    // Resize: mål igen, og hold start fra højre-følelse
-    let t;
-    window.addEventListener('resize', () => {
-      clearTimeout(t);
-      t = setTimeout(() => {
-        vw = view.getBoundingClientRect().width;
-        singleW = measureSingleWidth(track);
-        pos = Math.min(pos, vw);
-      }, 150);
-    });
-
-    function frame(now){
-      const dt = (now - last) / 1000; last = now;
-      if (running){
-        const speed = (window.innerWidth >= 900) ? SPEED_DESKTOP : SPEED_MOBILE;
-        pos -= speed * dt;
-        if (pos <= -singleW){ pos += singleW; } // wrap efter én “kopi”
-        track.style.transform = `translateX(${pos}px)`;
-      }
-      requestAnimationFrame(frame);
-    }
-
-    // Første frame
-    track.style.transform = `translateX(${pos}px)`;
-    requestAnimationFrame(frame);
+  function openNav(){
+    nav.classList.add('open');
+    document.body.classList.add('menu-open');
+    burger.setAttribute('aria-expanded','true');
+    overlay.classList.add('show');
+    const first = nav.querySelector('a,button');
+    if(first) first.focus({preventScroll:true});
+  }
+  function closeNav(){
+    nav.classList.remove('open');
+    document.body.classList.remove('menu-open');
+    burger.setAttribute('aria-expanded','false');
+    overlay.classList.remove('show');
+    burger.focus({preventScroll:true});
+  }
+  function toggleNav(){
+    if(nav.classList.contains('open')) closeNav();
+    else openNav();
   }
 
-  function init(){
-    document.querySelectorAll('[data-marquee]').forEach(setup);
-  }
+  burger.addEventListener('click', toggleNav);
+  overlay.addEventListener('click', closeNav);
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init, { once: true });
-  } else {
-    init();
-  }
+  // Close when clicking any link inside nav
+  nav.addEventListener('click', (e)=>{
+    const link = e.target.closest('a');
+    if(link) closeNav();
+  });
+
+  // Close on Escape
+  document.addEventListener('keydown', (e)=>{
+    if(e.key === 'Escape' && nav.classList.contains('open')) closeNav();
+  });
 })();
 
 
+// Global custom cursor (dot + ring), robust tracking
+(function () {
+  const fine = window.matchMedia('(pointer: fine)').matches;
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!fine || reduced) return;
 
+  document.documentElement.classList.add('custom-cursor');
 
+  const dot = document.createElement('div');
+  dot.className = 'fe-cursor';
+  const ring = document.createElement('div');
+  ring.className = 'fe-cursor-ring';
+  document.body.append(dot, ring);
 
+  let x = innerWidth / 2, y = innerHeight / 2;  // målpunkt
+  let rx = x, ry = y;                           // ringens smoothede position
+
+  // præcis position (left/top) uden offset-bugs
+  function onMove(e) {
+    x = e.clientX; y = e.clientY;
+    dot.style.left = x + 'px'; dot.style.top = y + 'px';
+  }
+  window.addEventListener('pointermove', onMove, { passive: true });
+
+  // highlight når vi er over interaktive elementer
+  const hoverSel = ['a','button','.btn','[role="button"]','summary','label'].join(',');
+  window.addEventListener('pointermove', (e) => {
+    const el = e.target.closest(hoverSel);
+    document.documentElement.classList.toggle('cursor-hover', !!el);
+  }, { passive: true });
+
+  // === Smooth follow (FPS-uafhængig) ===
+  (function () {
+    let last = performance.now();
+    function raf(now) {
+      const dt = Math.max(0, Math.min(32, now - last)); // clamp spikes
+      last = now;
+
+      const isHover = document.documentElement.classList.contains('cursor-hover');
+      const base = 0.10;  // rolig uden hover
+      const fast = 0.16;  // lidt hurtigere ved hover
+      const rate = isHover ? fast : base;
+
+      // konverter til FPS-uafhængig blanding
+      const t = 1 - Math.exp(-rate * (dt / 16.67));
+
+      // valgfri max step per frame (glatter tracking)
+      const MAX_STEP = isHover ? 60 : 30; // px
+      const dx = x - rx, dy = y - ry;
+      const dist = Math.hypot(dx, dy);
+      const step = Math.min(dist * t, MAX_STEP);
+      const nx = dist ? dx / dist : 0;
+      const ny = dist ? dy / dist : 0;
+
+      rx += nx * step; ry += ny * step;
+      ring.style.left = rx + 'px'; ring.style.top  = ry + 'px';
+
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+  })();
+
+  // klik-feedback (pulse via .cursor-click)
+  window.addEventListener('pointerdown', () => {
+    document.documentElement.classList.add('cursor-click');
+  });
+  window.addEventListener('pointerup', () => {
+    document.documentElement.classList.remove('cursor-click');
+  });
+
+  // vis/skip når musen forlader vinduet
+  document.addEventListener('mouseleave', () => {
+    dot.style.opacity = '0'; ring.style.opacity = '0';
+  });
+  document.addEventListener('mouseenter', () => {
+    dot.style.opacity = '1'; ring.style.opacity = '1';
+  });
+
+  // Undgå custom cursor i contenteditable (behøver I-beam)
+  document.addEventListener('pointerover', (e) => {
+    if (e.target.closest('[contenteditable="true"]')) {
+      document.documentElement.classList.remove('custom-cursor');
+      dot.style.display = 'none'; ring.style.display = 'none';
+    }
+  });
+  document.addEventListener('pointerout', (e) => {
+    if (e.target.closest('[contenteditable="true"]')) {
+      document.documentElement.classList.add('custom-cursor');
+      dot.style.display = ''; ring.style.display = '';
+    }
+  });
+})();
