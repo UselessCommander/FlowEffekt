@@ -1,29 +1,31 @@
 <?php
 return [
-  [
-    'slug'   => 'vaerdifulde-liv',
-    'title'  => 'Værdifulde Liv',
-    'tags'   => ['Web'],
-    'more'   => ['Visuel identitet','WordPress'],
-    'blurb'  => 'Webdesign og WordPress-hjemmeside – enkel, hurtig og let at vedligeholde.',
-    'status' => 'published', // brug 'published' når du har en rigtig case-side
-    'img'    => '/assets/img/cases/Vaerdifuldeliv - Macbook Pro.png',
-    'credits'    => [],
-    'udfordring' => 'Kort tekst om konteksten: hvad skulle løses, og hvorfor.',
-    'losning'    => [
-      'Modulært design-system med klare typografiske hierarkier',
-      'WordPress med blokke/ACF for enkel redigering',
-      'Performance-optimering (hastighed og stabilitet)',
-      'Tilgængelighed og UX fokus'
-    ],
-    'resultat'   => 'Opsummer de vigtigste effekter, fx forbedret hastighed, engagement eller konvertering.',
-    'fakta'      => [
-      'Kunde'      => 'Værdifulde Liv',
-      'År'         => '2025',
-      'Leverancer' => ['Webdesign','WordPress'],
-      'Link'       => 'https://vaerdifuldeliv.dk'
-    ],
+[
+  'slug'   => 'vaerdifulde-liv',
+  'title'  => 'Værdifulde Liv',
+  'tags'   => ['Web'],
+  'more'   => ['Webdesign','WordPress'],
+  'blurb' => 'WordPress-hjemmeside til en nystartet terapeutvirksomhed – designet i Divi med rolige farver, enkel struktur og nærvær.',
+
+  'status' => 'published',
+  'img'    => '/assets/img/cases/Vaerdifuldeliv - Macbook Pro.png',
+  'credits'    => [],
+  'udfordring' => 'Værdifulde Liv stod uden hjemmeside og havde indtil da kun været til stede på Facebook. Som nystartet terapeutvirksomhed havde kunden brug for en digital platform, der kunne skabe tillid og give et roligt førstehåndsindtryk. Målet var et univers, der afspejlede værdier som nærvær, tryghed og ro – med inspiration fra en solnedgang og en enkel struktur.',
+  'losning'    => [
+    'Udvikling af skræddersyet WordPress-site bygget i Divi, så kunden selv kan redigere indholdet',
+    'Designet fra bunden med blokopbygning og klassisk typografi for klart hierarki',
+    'Farvepalette med varme, jordnære nuancer inspireret af solnedgangens ro',
+    'Enkel og rolig brugerrejse med fokus på nærvær og overskuelighed'
   ],
+  'resultat'   => 'Den færdige hjemmeside giver Værdifulde Liv en professionel online tilstedeværelse, der understøtter virksomhedens værdier og gør det nemt at kommunikere med nye klienter. Kunden udtrykte stor tilfredshed med løsningen ved projektets afslutning.',
+  'fakta'      => [
+    'Kunde'      => 'Værdifulde Liv',
+    'År'         => '2025',
+    'Leverancer' => ['Webdesign','WordPress','Farvepalette'],
+    'Link'       => 'https://vaerdifuldeliv.dk'
+  ],
+],
+
 
   [
     'slug'   => 'byggefidusen',
@@ -49,42 +51,48 @@ return [
     ],
   ],
 
-  [
-    'slug'   => 'mette-truesen',
-    'title'  => 'Mette Truesen',
-    'tags'   => ['Web'],
-    'more'   => ['Visuel identitet', 'Content', 'Custom code'],
-    'blurb'  => 'Visuel identitet, hjemmeside og content & fotos.',
-    'status' => 'published',
-    'img'    => '/assets/img/cases/Mette - Macbook Pro.png',
-    'intro'      => 'Ny identitet, website og content der afspejler Mettes personlige og varme tilgang.',
-    'highlights' => [
-      'Ny visuel identitet med farver, typografi og mikroelementer',
-      'Custom coded website med fokus på enkelhed og hastighed',
-      'Fotoretning og let billedmanus til nøglesektioner',
-    ],
-    'proces'     => [
-      'Kickoff og kortlægning af målgruppe og tone-of-voice',
-      'Designsystem: farver, typografi, komponenter og ikonografi',
-      'Produktion: foto og tekst, samling i website',
-      'Launch og finpudsning efter feedback',
-    ],
-    'stack'      => ['Figma','Custom code','Photography'],
-    'credits'    => [ 'Foto' => 'Marie (ekstern)' ],
-    'udfordring' => 'Behov for en sammenhængende visuel identitet og stærkt indhold til hjemmesiden.',
-    'losning'    => [
-      'Udvikling af en visuel identitet med fokus på brandets kerneværdier',
-      'Content creation inklusive tekst og fotos',
-      'Tilpasning af hjemmeside med custom code for unik funktionalitet'
-    ],
-    'resultat'   => 'Øget brandgenkendelse og bedre brugerengagement på hjemmesiden.',
-    'fakta'      => [
-      'Kunde'      => 'Mette Truesen',
-      'År'         => '2024',
-      'Leverancer' => ['Visuel identitet', 'Content', 'Custom code'],
-      'Link'       => 'https://mettetruesen.dk'
-    ],
+[
+  'slug'   => 'mette-truesen',
+  'title'  => 'Mette Truesen',
+  'tags'   => ['Web'],
+  'more'   => ['Visuel identitet', 'Content', 'Custom code'],
+  'blurb' => 'Visuel identitet, content og custom coded hjemmeside, der giver Mette en professionel og varm online profil.',
+
+  'status' => 'published',
+  'img'    => '/assets/img/cases/Mette - Macbook Pro.png',
+  'intro'      => 'Ny identitet, website og content der afspejler Mettes personlige og varme tilgang.',
+  'highlights' => [
+    'Ny visuel identitet med farver og typografi',
+    'Custom coded website udviklet fra bunden for hastighed og enkelhed',
+    'Fotoretning, billedmanus og content-produktion til nøglesektioner',
+    'Tryksager: visitkort og postkort i samme visuelle linje'
   ],
+  'proces'     => [
+    'Kickoff med interview og kortlægning af målgruppe og tone-of-voice',
+    'Designsystem: farver og typografi som rød tråd i identiteten',
+    'Udvikling af brugerrejse, moodboards og tests for at finde den rette retning',
+    'Produktion: foto, tekst og design – samlet i custom coded website',
+    'Tryksager: design og produktion af visitkort og postkort',
+    'Launch og iterationer efter feedback'
+  ],
+  'stack'      => ['Figma','HTML','CSS','JavaScript','Photography'],
+  'credits'    => [ 'Foto' => 'Marie-Bine Bang (ekstern)' ],
+  'udfordring' => 'Mette stod uden en sammenhængende identitet og havde ingen hjemmeside. Som ny terapeut havde hun brug for at vise hvem hun er, hvad hun kan, og skabe tillid online. Hun ønskede at tiltrække klienter med en professionel, men samtidig varm, jordnær og minimalistisk visuel profil.',
+  'losning'    => [
+    'Alt udviklet fra bunden: design, brugerrejse, tests og custom coded hjemmeside',
+    'Udarbejdelse af en visuel identitet med jordnære farver og minimalistisk udtryk',
+    'Contentproduktion med foto, billedmanus og let redigerede tekster',
+    'Tryksager i samme visuelle linje: visitkort og postkort'
+  ],
+  'resultat'   => 'Mette fik en sammenhængende identitet og en professionel online tilstedeværelse, der gør det nemt for nye klienter at finde og møde hende. Hjemmesiden fremstår rolig og jordnær, med enkel navigation og tydelig formidling af hendes ydelser. Kunden udtrykte stor tilfredshed med helheden og føler sig nu bedre rustet til at tiltrække klienter.',
+  'fakta'      => [
+    'Kunde'      => 'Mette Truesen',
+    'År'         => '2024',
+    'Leverancer' => ['Visuel identitet','Content','Custom code','Tryksager'],
+    'Link'       => 'https://mettetruesen.dk'
+  ],
+],
+
 
   [
     'slug'   => 'tmmj-10aar',
@@ -92,7 +100,7 @@ return [
     'tags'   => ['Video','Foto'],
     'more'   => ['Eventoptagelse'],
     'blurb'  => 'Optagelser af TMMJ’s 10-års jubilæum, udført for Webfair.',
-    'status' => 'published',
+    'status' => 'unpublished',
     'img'    => '/assets/img/cases/tmmj-hero.jpg',
   
     'intro'      => 'Vi stod for video- og fotooptagelser ved Tømrermester Martin Jespersens 10-års jubilæum. Materialet blev leveret til Webfair, der stod for redigering og videre brug.',
@@ -139,7 +147,7 @@ return [
     'tags'   => ['Video','Content'],
     'more'   => ['Videoproduktion','Content'],
     'blurb'  => 'Stemningsvideo til Multiflyt, brugt på deres hjemmeside som en del af hero-sektionen.',
-    'status' => 'published',
+    'status' => 'unpublished',
     'img'    => '/assets/img/cases/multiflyt-hero.jpg',
   
     'intro'      => 'En stemningsvideo der fremhæver Multiflyt som pålidelige, professionelle og imødekommende. Videoen bruges i dag på virksomhedens hjemmeside som en del af hero-sektionen.',
