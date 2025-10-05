@@ -147,8 +147,8 @@
     <?php endif; ?>
 
     <section class="case-body">
-      <div class="container" style="max-width: 1000px;">
-        <div style="display:grid; gap:24px; grid-template-columns: 1.2fr .8fr;">
+      <div class="container case-wrap">
+        <div class="case-grid">
           <div>
             <?php if (!empty($case['udfordring'])): ?>
               <h2>Udfordring &amp; mål</h2>
@@ -173,6 +173,7 @@
                 <p><?= e($case['losning']) ?></p>
               <?php endif; ?>
             <?php endif; ?>
+
             <?php if (!empty($case['credits']) && is_array($case['credits'])): ?>
               <h2>Credits</h2>
               <ul>
@@ -194,13 +195,18 @@
             <?php endif; ?>
 
             <?php if (!empty($case['gallery']) && is_array($case['gallery'])): ?>
-              <div class="case-gallery" style="display:grid; gap:12px; grid-template-columns:1fr 1fr; margin-top: 12px;">
+              <div class="case-gallery">
                 <?php foreach ($case['gallery'] as $g): ?>
-                  <img src="<?= e($g) ?>" alt="<?= e(($case['title'] ?? 'Case') . ' – billede') ?>" loading="lazy" style="width:100%; border-radius:12px; aspect-ratio:4/3; object-fit:cover;" />
+                  <img
+                    src="<?= e($g) ?>"
+                    alt="<?= e(($case['title'] ?? 'Case') . ' – billede') ?>"
+                    loading="lazy"
+                  />
                 <?php endforeach; ?>
               </div>
             <?php endif; ?>
           </div>
+
           <aside>
             <div class="card">
               <h3 style="margin-top:0;">Fakta</h3>
@@ -237,7 +243,10 @@
             </div>
           </aside>
         </div>
-        <p style="margin-top:1.2rem;"><a class="link" href="<?= e(fe_url('cases.php')) ?>">← Tilbage til alle cases</a></p>
+
+        <p style="margin-top:1.2rem;">
+          <a class="link" href="<?= e(fe_url('cases.php')) ?>">← Tilbage til alle cases</a>
+        </p>
       </div>
     </section>
   <?php endif; ?>
