@@ -1,15 +1,5 @@
-/* =========================================================
-   FlowEffekt – Modern UI (Mobile First)
-   - System/Light/Dark via CSS-variabler
-   - Glas-header, aktiv nav, moderne cards & knapper
-   - Konsolideret typografi, spacing, fokus & tokens
-   ========================================================= */
 
-/* =========================================================
-   1) DESIGN TOKENS & TEMA
-   ========================================================= */
 
-/* ---- Light (default) ---- */
 :root{
   /* Surfaces */
   --primary-bg:#F7F8FA;
@@ -119,15 +109,12 @@ html[data-theme="dark"]{
 }
 
 
-/* =========================================================
-   2) BASE / TYPOGRAFI / CONTAINER / ACCESSIBILITY
-   ========================================================= */
 *{ box-sizing:border-box; }
 html,body{ height:100%; }
 
 body{
   margin:0;
-  padding:0 1rem;
+  padding:0;
   padding-top: var(--header-h);
   font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
   font-size:clamp(16px,0.35vw + 15px,18px);
@@ -228,10 +215,6 @@ h3{ font-size:clamp(18px,1.6vw,22px); }
   @keyframes drawer-in{ 0%{transform:translateX(100%)} 80%{transform:translateX(-2%)} 100%{transform:translateX(0)} }
   .nav.open{ animation: drawer-in .32s ease both; }
 
-  .nav-backdrop{ position: fixed; inset: 0; z-index: 1050; background: rgba(0,0,0,.0);
-                 opacity:0; pointer-events:none; transition: background .28s ease, opacity .28s ease; }
-  .nav-backdrop.show{ opacity:1; pointer-events:auto; background: rgba(0,0,0,.35); }
-
   body.menu-open{ overflow:hidden; }
 
   @media (prefers-reduced-motion: reduce){
@@ -297,9 +280,7 @@ h3{ font-size:clamp(18px,1.6vw,22px); }
 .card p{ margin:0; color:var(--text-light); }
 
 
-/* =========================================================
-   5) SECTIONS (Hero, Stripe, Dividers)
-   ========================================================= */
+
 .hero{
   padding-block:clamp(40px,7vw,96px);
   background:
@@ -335,21 +316,18 @@ h3{ font-size:clamp(18px,1.6vw,22px); }
 }
 
 
-/* =========================================================
-   6) CASE LAYOUT (SAMLET & OPTIMERET)
-   - Fakta først på mobil, sticky på desktop
-   ========================================================= */
 
-/* Hero for cases */
-.case-hero{
-  padding-block: clamp(20px, 4vw, 48px);
+.case-hero {
+  /* Giver luft over og under billedet */
+  padding-block: clamp(20px, 4vw, 48px);background: var(--panel-bg); border-radius: 16px;
 }
-.case-hero .container{ display: grid; place-items: center; }
-.case-hero img{
-  width: 100%; display: block; border-radius: 16px; aspect-ratio: 16/9;
-  object-fit: contain; object-position:center; background: var(--panel-bg); margin-top:.25rem;
-  box-shadow: 0 6px 24px rgba(0,0,0,.06);
+
+.case-hero .container {
+  display: grid; place-items: center;
 }
+
+
+
 
 /* Case oversigt (cards) */
 .case-list .list{ display:grid; gap:.9rem; grid-template-columns:1fr; }
@@ -471,12 +449,61 @@ h3{ font-size:clamp(18px,1.6vw,22px); }
 .contact-form input, .contact-form textarea{
   width:100%; padding:.8rem; border-radius:.6rem;
   border:1px solid var(--outline); background:var(--secondary-bg); color:var(--text-dark);
-  transition:border-color .2s, box-shadow .2s, background-color .2s;
+  transition:border-color .2s, box-shadow .2s, background-color .2s
 }
 .contact-form :is(input, textarea):focus{
   border-color:var(--cta-color); box-shadow:0 0 0 6px var(--ring);
   background-color:color-mix(in oklab, var(--secondary-bg) 90%, transparent);
 }
+
+/* === Kontakt: nye inputs (select + checkbox) === */
+
+/* Selects samme look som inputs */
+.contact-form select{
+  width:100%;
+  padding:.8rem 2.2rem .8rem .8rem;           /* plads til pil */
+  border-radius:.6rem;
+  border:1px solid var(--outline);
+  background:var(--secondary-bg);
+  color:var(--text-dark);
+  transition:border-color .2s, box-shadow .2s, background-color .2s;
+  -webkit-appearance:none; appearance:none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%239aa3af' d='M5.5 7.5 10 12l4.5-4.5-1.4-1.4L10 9.2 6.9 6.1z'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position: right .7rem center;
+  background-size: 16px 16px;
+}
+.contact-form select:focus{
+  border-color:var(--cta-color);
+  box-shadow:0 0 0 6px var(--ring);
+  background-color:color-mix(in oklab, var(--secondary-bg) 90%, transparent);
+}
+
+/* Checkbox – brug systemets 'accent-color' */
+.contact-form input[type="checkbox"]{
+  width:1.15rem; height:1.15rem;
+  accent-color: var(--cta-color);
+  margin-top:.2rem; /* align med tekst */
+}
+
+/* Label med checkbox: hold linjehøjde pæn */
+.contact-form .input label[for="agree"],
+.contact-form .input label:has(> input[type="checkbox"]) {
+  display:flex; gap:.55rem; align-items:flex-start;
+  font-weight:600; color:var(--text-light);
+}
+
+/* Lille hjælpetekst mulighed (valgfrit) */
+.contact-form .help{ color:var(--muted); font-size:.9rem; margin-top:-.2rem; }
+
+/* Læg de tre felter (pakke/budget/tidsramme) i tre kolonner på desktop */
+.contact-form .row-choices{ display:grid; gap:.9rem; }
+@media (min-width:900px){
+  .contact-form .row-choices{ grid-template-columns: 1fr 1fr 1fr; }
+}
+
+/* Knap-afstand på formularen */
+.contact-form .btn{ margin-top:.3rem; }
 .hp{ position:absolute; left:-9999px; top:-9999px; height:0; width:0; opacity:0; }
 .alert{ padding:.8rem; border-radius:.6rem; border:1px solid; margin-bottom:1rem; }
 .alert.success{ border-color:#22c55e; background:color-mix(in oklab,#22c55e 12%, var(--secondary-bg)); }
@@ -717,6 +744,35 @@ h3{ font-size:clamp(18px,1.6vw,22px); }
 @media (min-width: 720px) and (max-width: 1023px){
   :where(.feature-grid, .cards) .grid-3{ grid-template-columns: repeat(2, 1fr); }
   .lead-split{ grid-template-columns: 1.25fr 1fr; }
+}
+
+/* Base reset: gør knappen usynlig og flad som default */
+.nav-backdrop{
+  display: none;
+  position: fixed;
+  inset: 0;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1050;
+  transition: background .28s ease, opacity .28s ease;
+}
+
+/* Mobil: aktiver overlayet og .show-tilstand */
+@media (max-width: 899px){
+  .nav-backdrop{ display: block; }              /* findes, men usynlig indtil .show */
+  .nav-backdrop.show{
+    opacity: 1;
+    pointer-events: auto;
+    background: rgba(0,0,0,.35);
+  }
+}
+
+/* Desktop: hard-hide, vinder over alt andet pga. !important */
+@media (min-width: 900px){
+  .nav-backdrop{ display: none !important; }
 }
 
 

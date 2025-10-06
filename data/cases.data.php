@@ -8,7 +8,7 @@ return [
   'blurb' => 'WordPress-hjemmeside til en nystartet terapeutvirksomhed – designet i Divi med rolige farver, enkel struktur og nærvær.',
 
   'status' => 'published',
-  'img'    => '/assets/img/cases/Vaerdifuldeliv - Macbook Pro.png',
+  'img'    => '/assets/img/cases/vaerdifuldeliv/vaerdifuldeliv.png',
   'credits'    => [],
   'udfordring' => 'Værdifulde Liv stod uden hjemmeside og havde indtil da kun været til stede på Facebook. Som nystartet terapeutvirksomhed havde kunden brug for en digital platform, der kunne skabe tillid og give et roligt førstehåndsindtryk. Målet var et univers, der afspejlede værdier som nærvær, tryghed og ro – med inspiration fra en solnedgang og en enkel struktur.',
   'losning'    => [
@@ -34,7 +34,7 @@ return [
     'more'   => ['WordPress'],
     'blurb'  => 'WordPress-site baseret på kundens materialer — enkelt og uden nyt design.',
     'status' => 'published',
-    'img'    => '/assets/img/cases/Byggefidus - Macbook Pro.png',
+    'img'    => '/assets/img/cases/byggefidus/byggefidus.png',
     'credits'    => [],
     'udfordring' => 'Behov for en simpel og funktionel WordPress-løsning uden omfattende redesign.',
     'losning'    => [
@@ -59,7 +59,7 @@ return [
   'blurb' => 'Visuel identitet, content og custom coded hjemmeside, der giver Mette en professionel og varm online profil.',
 
   'status' => 'published',
-  'img'    => '/assets/img/cases/Mette - Macbook Pro.png',
+  'img'    => '/assets/img/cases/Mette-Truesen/mette-truesen.png',
   'intro'      => 'Ny identitet, website og content der afspejler Mettes personlige og varme tilgang.',
   'highlights' => [
     'Ny visuel identitet med farver og typografi',
@@ -100,8 +100,8 @@ return [
     'tags'   => ['Video','Foto'],
     'more'   => ['Eventoptagelse'],
     'blurb'  => 'Optagelser af TMMJ’s 10-års jubilæum, udført for Webfair.',
-    'status' => 'unpublished',
-    'img'    => '/assets/img/cases/tmmj-hero.jpg',
+    'status' => 'published',
+    'img'    => '/assets/img/cases/tmmj/Tmmj-10aars-jubi.png',
   
     'intro'      => 'Vi stod for video- og fotooptagelser ved Tømrermester Martin Jespersens 10-års jubilæum. Materialet blev leveret til Webfair, der stod for redigering og videre brug.',
     'highlights' => [
@@ -135,10 +135,6 @@ return [
       'Link'       => 'https://www.facebook.com/share/v/17MmzmS7CX/'
     ],
   
-    'gallery'    => [
-      '/assets/img/cases/tmmj-01.jpg',
-      '/assets/img/cases/tmmj-02.jpg'
-    ],
   ],
  
   [
@@ -147,8 +143,8 @@ return [
     'tags'   => ['Video','Content'],
     'more'   => ['Videoproduktion','Content'],
     'blurb'  => 'Stemningsvideo til Multiflyt, brugt på deres hjemmeside som en del af hero-sektionen.',
-    'status' => 'unpublished',
-    'img'    => '/assets/img/cases/multiflyt-hero.jpg',
+    'status' => 'published',
+    'img'    => '/assets/img/cases/MultiFlyt/MultiFlyt-Hero.png',
   
     'intro'      => 'En stemningsvideo der fremhæver Multiflyt som pålidelige, professionelle og imødekommende. Videoen bruges i dag på virksomhedens hjemmeside som en del af hero-sektionen.',
     'highlights' => [
@@ -165,7 +161,7 @@ return [
     'stack'      => ['Kamera','Drone','Premiere Pro'],
     'credits'    => [
       'Samarbejde' => 'Webfair',
-      'Foto/Video' => 'FlowEffekt team',
+      'Foto/Video' => 'FlowEffekt',
     ],
     'udfordring' => 'Multiflyt ønskede en kort video til hjemmesidens forside, der kunne skabe tillid og vise, at de håndterer flytteopgaver professionelt og med omhu.',
     'losning'    => [

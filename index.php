@@ -53,29 +53,29 @@
   <div class="container list grid-3">
     
   <article class="card case-card kpi">
-    <img src="/assets/img/cases/Vaerdifuldeliv - Macbook Pro.png"
+    <img src="/assets/img/cases/vaerdifuldeliv/vaerdifuldeliv.png"
         alt="Værdifulde Liv – webdesign og WordPress-hjemmeside"
         loading="lazy" decoding="async">
     <h3>Værdifulde Liv</h3>
     <p>Webdesign og WordPress-hjemmeside – enkel, hurtig og let at vedligeholde.</p>
-    <a class="link" href="/cases.php">Se case</a>
+    <a class="link" href="/cases.php?slug=vaerdifulde-liv">Se case</a>
   </article>
     <article class="card case-card kpi">
-      <img src="/assets/img/cases/Mette - Macbook Pro.png"
-          alt="Sauna Gus Kattinge – website-mockup med ny visuel identitet, foto og video"
+      <img src="/assets/img/cases/Mette-Truesen/mette-truesen.png"
+          alt="Mette Truesen – website-mockup med ny visuel identitet, foto og video"
           loading="lazy" decoding="async">
       <h3>Mette Truesen </h3>
       <p>Visuel identitet, hjemmeside og content & fotos</p>
-      <a class="link" href="/cases.php">Se case</a>
+      <a class="link" href="/cases.php?slug=mette-truesen">Se case</a>
     </article>
 
     <article class="card case-card kpi">
-      <img src="/assets/img/cases/Byggefidus - Macbook Pro.png"
+      <img src="/assets/img/cases/Byggefidus/byggefidus.png"
           alt="Byggefidusen – hjemmeside"
           loading="lazy" decoding="async">
       <h3>Byggefidusen</h3>
       <p>Opbygning og opsætning af hjemmeside.</p>
-      <a class="link" href="/cases.php">Se case</a>
+      <a class="link" href="/cases.php?slug=byggefidusen">Se case</a>
     </article>
   </div>
 </section>
@@ -120,19 +120,19 @@
     <div class="about-grid">
       <div class="card">
         <h3>1) Kickoff</h3>
-        <p>Behov, målgruppe og succeskriterier. Vi prioriterer scope og sætter tempoet.</p>
+        <p>Vi afklarer behov, målgruppe og mål og lægger en realistisk plan for projektet.</p>
       </div>
       <div class="card">
-        <h3>2) Designsystem</h3>
-        <p>UI-komponenter, farver og typografi – mobile-first og tilgængeligt.</p>
+        <h3>2) Design</h3>
+        <p>Vi bygger et visuelt udtryk, der passer til brandet med fokus på brugervenlighed og stil.</p>
       </div>
       <div class="card">
-        <h3>3) Build</h3>
-        <p>HTML, CSS, JS & PHP med fokus på performance, SEO og vedligehold.</p>
+        <h3>3) Udvikling</h3>
+        <p>Vi udvikler hjemmesiden i det system, der passer bedst fx WordPress, Shopify eller custom.</p>
       </div>
       <div class="card">
-        <h3>4) Launch & optimering</h3>
-        <p>Overvågning, A/B-tests og løbende forbedringer efter behov.</p>
+        <h3>4) Lancering</h3>
+        <p>Vi tester alt, hjælper med opsætning og sikrer, at siden kører, som den skal.</p>
       </div>
     </div>
   </div>

@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="da">
+<head>
+  <meta charset="utf-8" />
+  <title>Hurtig Video Player</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root{color-scheme: light dark;}
+    body{
+      margin:0; font:16px/1.4 system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      min-height:100dvh; display:grid; place-items:center; background:#111; color:#eee;
+    }
+    .wrap{
+      width:min(1100px, 96vw); display:grid; gap:12px;
+      background:#1a1d21; padding:16px; border-radius:12px; border:1px solid #2a2f36;
+      box-shadow:0 10px 30px rgba(0,0,0,.35);
+    }
+    .bar{display:flex; gap:8px; align-items:center; flex-wrap:wrap}
+    .bar input[type="file"]{
+      appearance:none; background:#0b0c0e; color:#fff; border:1px solid #2a2f36;
+      padding:10px 12px; border-radius:10px; cursor:pointer;
+    }
+    .bar button{
+      padding:10px 12px; border-radius:10px; border:1px solid #2a2f36; background:#0b0c0e; color:#fff; cursor:pointer;
+    }
+    .bar button:disabled{opacity:.5; cursor:not-allowed}
+    .meta{opacity:.8; font-size:.95rem}
+    video{
+      width:100%; max-height:70dvh; background:#000; border-radius:10px; outline:none;
+    }
+    .hint{opacity:.7; font-size:.9rem}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="bar">
+      <input id="file" type="file" accept="video/*" />
+      <button id="play" disabled>▶︎ Afspil</button>
+      <button id="pause" disabled>⏸ Pause</button>
+      <button id="stop" disabled>⏹ Stop</button>
+      <span class="meta" id="name">Ingen fil valgt</span>
+    </div>
+
+    <video id="player" controls playsinline></video>
+
+    <div class="hint">
+      Tip: Du kan også trække en videofil ind på siden. Understøttede formater afhænger af din browser
+      (typisk MP4/H.264 + AAC, WebM/VP9 + Opus, osv.).
+    </div>
+  </div>
+
+  <script>
+    const fileInput = document.getElementById('file');
+    const player    = document.getElementById('player');
+    const nameEl    = document.getElementById('name');
+    const btnPlay   = document.getElementById('play');
+    const btnPause  = document.getElementById('pause');
+    const btnStop   = document.getElementById('stop');
+
+    let currentUrl = null;
+
+    function loadFile(file){
+      if(!file) return;
+      if(currentUrl) URL.revokeObjectURL(currentUrl);
+      currentUrl = URL.createObjectURL(file);
+      player.src = currentUrl;
+      nameEl.textContent = `${file.name} (${(file.size/1024/1024).toFixed(1)} MB)`;
+      enableControls(true);
+      player.play().catch(()=>{}); // auto-play hvis muligt
+    }
+
+    function enableControls(on){
+      [btnPlay, btnPause, btnStop].forEach(b => b.disabled = !on);
+    }
+
+    fileInput.addEventListener('change', (e) => {
+      const f = e.target.files[0];
+      loadFile(f);
+    });
+
+    // Drag & drop
+    window.addEventListener('dragover', (e)=>{ e.preventDefault(); });
+    window.addEventListener('drop', (e)=>{
+      e.preventDefault();
+      const f = e.dataTransfer.files && e.dataTransfer.files[0];
+      if(f && f.type.startsWith('video/')) loadFile(f);
+    });
+
+    // Simple knapper
+    btnPlay.addEventListener('click', ()=> player.play());
+    btnPause.addEventListener('click', ()=> player.pause());
+    btnStop.addEventListener('click', ()=>{
+      player.pause();
+      player.currentTime = 0;
+    });
+
+    // Tastatur: Mellemrum = play/pause, F = fuld skærm, M = mute
+    window.addEventListener('keydown', (e)=>{
+      if(e.target.tagName === 'INPUT') return; // undgå konflikt i file input
+      if(e.code === 'Space'){ e.preventDefault(); player.paused ? player.play() : player.pause(); }
+      if(e.key.toLowerCase() === 'f'){
+        if(!document.fullscreenElement) player.requestFullscreen().catch(()=>{});
+        else document.exitFullscreen();
+      }
+      if(e.key.toLowerCase() === 'm'){ player.muted = !player.muted; }
+      if(e.key === 'ArrowRight'){ player.currentTime += 5; }
+      if(e.key === 'ArrowLeft'){ player.currentTime -= 5; }
+    });
+
+    // Ryd op når man forlader siden
+    window.addEventListener('beforeunload', ()=>{ if(currentUrl) URL.revokeObjectURL(currentUrl); });
+
+    // Start med kontroller slået fra
+    enableControls(false);
+  </script>
+</body>
+</html>

@@ -46,26 +46,49 @@
 </section>
 
 <div class="section-divider" role="separator" aria-hidden="true"></div>
-<!-- Værdier -->
-<section>
-  <div class="container cards">
-    <h2>Værdier</h2>
-    <div class="grid-3">
+<section class="about" aria-labelledby="values-title">
+  <div class="container">
+    <h2 id="values-title">Værdier</h2>
+
+    <div class="about-grid">
       <article class="card">
-        <h3><svg viewBox="0 0 24 24" aria-hidden="true" style="width:18px;height:18px;vertical-align:-3px;margin-right:.4rem"><path fill="currentColor" d="M12 2a7 7 0 016.2 10.3L17 16v2h-2v3h-6v-3H7v-2l-1.2-3.7A7 7 0 0112 2z"/></svg>Innovation</h3>
-        <p class="muted">Vi vælger moderne, robuste løsninger – ikke modefænomener.</p>
+        <h3>
+          <svg viewBox="0 0 24 24" aria-hidden="true" style="width:18px;height:18px;vertical-align:-3px;margin-right:.4rem">
+            <path fill="currentColor" d="M12 2a7 7 0 016.2 10.3L17 16v2h-2v3h-6v-3H7v-2l-1.2-3.7A7 7 0 0112 2z"/>
+          </svg>
+          Innovation
+        </h3>
+        <p class="muted">Vi vælger løsninger, der holder – ikke hurtige trends.</p>
       </article>
+
       <article class="card">
-        <h3><svg viewBox="0 0 24 24" aria-hidden="true" style="width:18px;height:18px;vertical-align:-3px;margin-right:.4rem"><path fill="currentColor" d="M12 2l9 4-9 4-9-4 9-4zm-7 8l7 3 7-3v8l-7 3-7-3v-8z"/></svg>Troværdighed</h3>
-        <p class="muted">Klar kommunikation, realistiske tidsplaner og gennemsigtighed.</p>
+        <h3>
+          <svg viewBox="0 0 24 24" aria-hidden="true" style="width:18px;height:18px;vertical-align:-3px;margin-right:.4rem">
+            <path fill="currentColor" d="M12 2l9 4-9 4-9-4 9-4zm-7 8l7 3 7-3v8l-7 3-7-3v-8z"/>
+          </svg>
+          Troværdighed
+        </h3>
+        <p class="muted">Vi lover kun det, vi kan holde og gør det, vi lover.</p>
       </article>
+
       <article class="card">
-        <h3><svg viewBox="0 0 24 24" aria-hidden="true" style="width:18px;height:18px;vertical-align:-3px;margin-right:.4rem"><path fill="currentColor" d="M3 13h8V3H3v10zm10 8h8V3h-8v18zM3 21h8v-6H3v6z"/></svg>Effektivitet</h3>
-        <p class="muted">Lean stack, modulære komponenter og dokumenterede arbejdsgange.</p>
+        <h3>
+          <svg viewBox="0 0 24 24" aria-hidden="true" style="width:18px;height:18px;vertical-align:-3px;margin-right:.4rem">
+            <path fill="currentColor" d="M3 13h8V3H3v10zm10 8h8V3h-8v18zM3 21h8v-6H3v6z"/>
+          </svg>
+          Effektivitet
+        </h3>
+        <p class="muted">Vi gør tingene enkelt, hurtigt og rigtigt.</p>
       </article>
+
       <article class="card">
-        <h3><svg viewBox="0 0 24 24" aria-hidden="true" style="width:18px;height:18px;vertical-align:-3px;margin-right:.4rem"><path fill="currentColor" d="M12 7a5 5 0 015 5h5a10 10 0 10-10 10v-5a5 5 0 110-10z"/></svg>Målrettet design</h3>
-        <p class="muted">Design med formål: læsbarhed, tilgængelighed og konvertering.</p>
+        <h3>
+          <svg viewBox="0 0 24 24" aria-hidden="true" style="width:18px;height:18px;vertical-align:-3px;margin-right:.4rem">
+            <path fill="currentColor" d="M12 7a5 5 0 015 5h5a10 10 0 10-10 10v-5a5 5 0 110-10z"/>
+          </svg>
+          Målrettet design
+        </h3>
+        <p class="muted">Design, der gør det nemt at læse, forstå og handle.</p>
       </article>
     </div>
   </div>
@@ -79,8 +102,8 @@
       <article class="card">
         <h3>Strategisk webdesign</h3>
         <ul class="check">
-          <li>Designsystem der skalerer</li>
-          <li>Konsistent UI på tværs af sider</li>
+          <li>Design der kan vokse</li>
+          <li>Ensartet design på alle sider</li>
           <li>Komponenter med genbrug</li>
         </ul>
       </article>
@@ -89,15 +112,15 @@
         <ul class="check">
           <li>Tekst, foto og video</li>
           <li>Storytelling med klare budskaber</li>
-          <li>Content pipelines til SoMe</li>
+          <li>Indhold klar til sociale medier</li>
         </ul>
       </article>
       <article class="card">
         <h3>Tæt samarbejde</h3>
         <ul class="check">
-          <li>Partner-mentalitet</li>
-          <li>Klar kommunikation & scope</li>
-          <li>Fast kontaktperson</li>
+          <li>Partner-tilgang i hvert projekt</li>
+          <li>Klare aftaler og gennemsigtighed</li>
+          <li>Løbende dialog med teamet</li>
         </ul>
       </article>
     </div>
@@ -143,19 +166,19 @@
     <div class="about-grid">
       <div class="card">
         <h3>1) Kickoff</h3>
-        <p>Behov, målgruppe og succeskriterier. Vi prioriterer scope og sætter tempoet.</p>
+        <p>Vi afklarer behov, målgruppe og mål og lægger en realistisk plan for projektet.</p>
       </div>
       <div class="card">
-        <h3>2) Designsystem</h3>
-        <p>UI-komponenter, farver og typografi – mobile-first og tilgængeligt.</p>
+        <h3>2) Design</h3>
+        <p>Vi bygger et visuelt udtryk, der passer til brandet med fokus på brugervenlighed og stil.</p>
       </div>
       <div class="card">
-        <h3>3) Build</h3>
-        <p>HTML, CSS, JS & PHP med fokus på performance, SEO og vedligehold.</p>
+        <h3>3) Udvikling</h3>
+        <p>Vi udvikler hjemmesiden i det system, der passer bedst fx WordPress, Shopify eller custom.</p>
       </div>
       <div class="card">
-        <h3>4) Launch & optimering</h3>
-        <p>Overvågning, A/B-tests og løbende forbedringer efter behov.</p>
+        <h3>4) Lancering</h3>
+        <p>Vi tester alt, hjælper med opsætning og sikrer, at siden kører, som den skal.</p>
       </div>
     </div>
   </div>

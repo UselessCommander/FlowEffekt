@@ -73,7 +73,7 @@
             <li>4K-optagelse, farve & lyd</li>
             <li>Levering på 14 dage</li>
           </ul>
-          <a class="btn" href="/kontakt.php">Book introcall</a>
+          <a class="btn" href="/kontakt.php">Kontakt os</a>
         </article>
 
         <article class="card price-card">
@@ -85,7 +85,7 @@
             <li>Drone (hvis lovligt) + pro lyd</li>
             <li>Levering inden 14 dage</li>
           </ul>
-          <a class="btn ghost" href="/kontakt.php">Tal med os</a>
+          <a class="btn ghost" href="/kontakt.php">Kontakt os</a>
         </article>
       </div>
 
@@ -140,7 +140,7 @@
             <li>Let designsystem</li>
             <li>Implementering & opsætning</li>
           </ul>
-          <a class="btn ghost" href="/kontakt.php">Få et tilbud</a>
+          <a class="btn ghost" href="/kontakt.php">Kontakt os</a>
         </article>
 
         <article class="card price-card featured">
@@ -152,7 +152,7 @@
             <li>Komplet designsystem</li>
             <li>Performance-optimering</li>
           </ul>
-          <a class="btn" href="/kontakt.php">Book introcall</a>
+          <a class="btn" href="/kontakt.php">Kontakt os</a>
         </article>
 
         <article class="card price-card">
@@ -163,38 +163,39 @@
             <li>Designsprint & UX-research</li>
             <li>SLA & support</li>
           </ul>
-          <a class="btn ghost" href="/kontakt.php">Tal med os</a>
+          <a class="btn ghost" href="/kontakt.php">Kontakt os</a>
         </article>
       </div>
 
-      <!-- Web: Leverancer + teknik -->
+
       <div class="grid-3 cards">
-        <article class="card">
-          <h3>Du får altid</h3>
-          <ul class="check">
-            <li>Semantisk HTML + modulær CSS</li>
-            <li>Minimal JS & lazy loading</li>
-            <li>Open Graph & meta</li>
-          </ul>
-        </article>
-        <article class="card">
-          <h3>Teknik & standarder</h3>
-          <ul class="check">
-            <li>WCAG 2.2 & GDPR</li>
-            <li>Core Web Vitals</li>
-            <li>PHP / WordPress eller custom</li>
-          </ul>
-        </article>
-        <article class="card">
-          <h3>Resultater</h3>
-          <div class="metrics-grid">
-            <div class="metric"><strong>1.2s</strong><span>LCP (mobil)</span></div>
-            <div class="metric"><strong>92</strong><span>Perf.-score</span></div>
-            <div class="metric"><strong>+31%</strong><span>Leads</span></div>
-            <div class="metric"><strong>&lt;50KB</strong><span>Crit. CSS</span></div>
-          </div>
-        </article>
-      </div>
+  <article class="card">
+    <h3>Du får altid</h3>
+    <ul class="check">
+      <li>Ren HTML og modulær CSS</li>
+      <li>Kun nødvendig JavaScript og hurtig indlæsning</li>
+      <li>Delings- og SEO-tags sat korrekt op</li>
+    </ul>
+  </article>
+
+  <article class="card">
+    <h3>Teknik & standarder</h3>
+    <ul class="check">
+      <li>Tilgængelighed (WCAG 2.2) og GDPR</li>
+      <li>Hurtig og stabil ydelse (Core Web Vitals)</li>
+      <li>WordPress, PHP eller skræddersyet – efter behov</li>
+    </ul>
+  </article>
+
+  <article class="card">
+    <h3>Levering & vedligehold</h3>
+    <ul class="check">
+      <li>Klar overlevering og korte guides</li>
+      <li>Backup og grundlæggende sikkerhed</li>
+      <li>Mulighed for løbende hjælp efter behov</li>
+    </ul>
+  </article>
+</div>
     </div>
 
   </div>
