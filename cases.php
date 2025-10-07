@@ -42,76 +42,75 @@
   }
   $currentSlug = isset($_GET['slug']) ? (string)$_GET['slug'] : null;
 ?>
-<?php if (!$currentSlug): ?>
-<section class="page-intro">
-  <div class="container">
-    <h1>Cases</h1>
-    <p>Et lille udpluk. Kontakt os for mere – vi deler gerne flere eksempler.</p>
-  </div>
-</section>
 
-<section class="case-list">
-  <div class="container list">
-    <?php foreach ($cases as $c): ?>
-      <?php
-        $title  = $c['title'] ?? '';
-        $blurb  = $c['blurb'] ?? '';
-        $slug   = $c['slug']  ?? '';
-        $tags   = $c['tags']  ?? [];
-        $more   = $c['more']  ?? [];
-        $status = $c['status'] ?? 'soon';
-        // Local-friendly URL using query param (works without .htaccess)
-        $url    = fe_url('cases.php?slug=' . $slug);
-        $isSoon = ($status !== 'published');
-        $img    = $c['img'] ?? ($c['thumb'] ?? '');
-      ?>
-      <article class="case-card">
-        <?php if (!empty($img)): ?>
-          <div class="case-thumb-wrap">
-            <?php if ($isSoon): ?>
-              <img
-                src="<?= e($img) ?>"
-                alt="<?= e($title) ?>"
-                class="case-thumb"
-                loading="lazy"
-                style="width:100%; border-radius:12px; display:block; aspect-ratio: 16/10; object-fit: cover;"
-              >
-            <?php else: ?>
-              <a href="<?= e($url) ?>" aria-label="Se case: <?= e($title) ?>">
-                <img
-                  src="<?= e($img) ?>"
-                  alt="<?= e($title) ?>"
-                  class="case-thumb"
-                  loading="lazy"
-                  style="width:100%; border-radius:12px; display:block; aspect-ratio: 16/10; object-fit: cover;"
-                >
-              </a>
+<?php if (!$currentSlug): ?>
+  <!-- ===== CASE LISTE (stort billede + overlay-tekst i én kolonne) ===== -->
+  <section class="page-intro">
+    <div class="container">
+      <h1>Cases</h1>
+      <p>Et lille udpluk. Kontakt os for mere – vi deler gerne flere eksempler.</p>
+    </div>
+  </section>
+
+  <section class="case-feed">
+    <div class="container">
+      <?php foreach ($cases as $c): ?>
+        <?php
+          $title  = $c['title'] ?? '';
+          $blurb  = $c['blurb'] ?? '';
+          $slug   = $c['slug']  ?? '';
+          $tags   = $c['tags']  ?? [];
+          $more   = $c['more']  ?? [];
+          $status = $c['status'] ?? 'soon';
+
+          // Local-friendly URL using query param (works without .htaccess)
+          $url    = fe_url('cases.php?slug=' . $slug);
+          $isSoon = ($status !== 'published');
+
+          // Billede: brug 'img' hvis den findes, ellers 'thumb'
+          $img    = $c['img'] ?? ($c['thumb'] ?? '');
+
+          // Saml meta (tags + more) til en linje
+          $metaPieces = array_values(array_filter(array_merge($tags, $more)));
+          $metaLine   = implode(' · ', $metaPieces);
+        ?>
+        <article class="case-item">
+          <div class="case-item__media">
+            <?php if (!empty($img)): ?>
+              <?php if ($isSoon): ?>
+                <img src="<?= e($img) ?>" alt="<?= e($title) ?>" loading="lazy">
+              <?php else: ?>
+                <a href="<?= e($url) ?>" aria-label="Se case: <?= e($title) ?>">
+                  <img src="<?= e($img) ?>" alt="<?= e($title) ?>" loading="lazy">
+                </a>
+              <?php endif; ?>
             <?php endif; ?>
+
+            <div class="case-item__overlay">
+              <?php if ($metaLine !== ''): ?>
+                <div class="meta"><?= e($metaLine) ?></div>
+              <?php endif; ?>
+
+              <h3><?= e($title) ?></h3>
+
+              <?php if (!empty($blurb)): ?>
+                <p><?= e($blurb) ?></p>
+              <?php endif; ?>
+
+              <?php if ($isSoon): ?>
+                <span class="link" aria-disabled="true">Se case (snart)</span>
+              <?php else: ?>
+                <a class="link" href="<?= e($url) ?>">Se case →</a>
+              <?php endif; ?>
+            </div>
           </div>
-        <?php endif; ?>
-        <div class="case-meta">
-          <?php if (!empty($tags)): ?>
-            <span class="tag"><?= e($tags[0]) ?></span>
-          <?php endif; ?>
-          <?php foreach (array_slice($tags, 1) as $t): ?>
-            • <span><?= e($t) ?></span>
-          <?php endforeach; ?>
-          <?php foreach ($more as $m): ?>
-            • <span><?= e($m) ?></span>
-          <?php endforeach; ?>
-        </div>
-        <h3><?= e($title) ?></h3>
-        <p><?= e($blurb) ?></p>
-        <?php if ($isSoon): ?>
-          <a class="link" aria-disabled="true">Se case (snart)</a>
-        <?php else: ?>
-          <a class="link" href="<?= e($url) ?>">Se case</a>
-        <?php endif; ?>
-      </article>
-    <?php endforeach; ?>
-  </div>
-</section>
+        </article>
+      <?php endforeach; ?>
+    </div>
+  </section>
+
 <?php else: ?>
+  <!-- ===== SINGLE CASE (uændret) ===== -->
   <?php
     $case = fe_get_case_by_slug($cases, $currentSlug);
     $isPublished = ($case['status'] ?? '') === 'published';
@@ -135,15 +134,15 @@
     </section>
 
     <?php if (!empty($case['img'])): ?>
-    <section class="case-hero">
-      <div class="container">
-        <img
-          src="<?= e($case['img']) ?>"
-          alt="<?= e($case['title'] ?? '') ?>"
-          loading="eager"
-        />
-      </div>
-    </section>
+      <section class="case-hero">
+        <div class="container">
+          <img
+            src="<?= e($case['img']) ?>"
+            alt="<?= e($case['title'] ?? '') ?>"
+            loading="eager"
+          />
+        </div>
+      </section>
     <?php endif; ?>
 
     <section class="case-body">

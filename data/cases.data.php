@@ -131,7 +131,7 @@ return [
       'Kunde'      => 'Webfair',
       'År'         => '2025',
       'Leverancer' => ['Fotooptagelser','Videooptagelser'],
-      'Event'      => 'Tømrermester Martin Jespersen – 10-års jubilæum',
+      'Event'      => 'Tømrermester Martin Jespersen – Jubilæumsvideo',
       'Link'       => 'https://www.facebook.com/share/v/17MmzmS7CX/'
     ],
   

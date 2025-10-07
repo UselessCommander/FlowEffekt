@@ -722,9 +722,7 @@ h3{ font-size:clamp(18px,1.6vw,22px); }
 }
 
 
-/* =========================================================
-   12) UTILITIES & RESPONSIVE HELPERS
-   ========================================================= */
+
 .visually-hidden{
   position:absolute !important; width:1px; height:1px; padding:0; margin:-1px;
   overflow:hidden; clip:rect(0,0,1px,1px); white-space:nowrap; border:0;
@@ -746,7 +744,6 @@ h3{ font-size:clamp(18px,1.6vw,22px); }
   .lead-split{ grid-template-columns: 1.25fr 1fr; }
 }
 
-/* Base reset: gør knappen usynlig og flad som default */
 .nav-backdrop{
   display: none;
   position: fixed;
@@ -760,7 +757,7 @@ h3{ font-size:clamp(18px,1.6vw,22px); }
   transition: background .28s ease, opacity .28s ease;
 }
 
-/* Mobil: aktiver overlayet og .show-tilstand */
+
 @media (max-width: 899px){
   .nav-backdrop{ display: block; }              /* findes, men usynlig indtil .show */
   .nav-backdrop.show{
@@ -814,3 +811,113 @@ h3{ font-size:clamp(18px,1.6vw,22px); }
 html[data-theme="light"] .fe-cursor{ background:#111; mix-blend-mode:normal; box-shadow:0 0 0 1px rgba(0,0,0,.15); }
 @keyframes cursor-click{ 0%{transform:translate(-50%,-50%) scale(.8); opacity:1} 50%{transform:translate(-50%,-50%) scale(1.3); opacity:.9} 100%{transform:translate(-50%,-50%) scale(1); opacity:.85} }
 .cursor-click .fe-cursor-ring{ animation: cursor-click .25s ease; }
+
+/* ===== CASE FEED – zig-zag + overlay længere ude ===== */
+
+.case-feed { padding-block: var(--section-y); }
+.case-feed .container{
+  display:flex; flex-direction:column;
+  gap:clamp(64px, 8vw, 96px);              /* lidt mere luft mellem items */
+}
+
+/* Hver case */
+.case-item{
+  position:relative;
+  display:flex; align-items:center;
+  justify-content:flex-start;              /* udgangspunkt: mod venstre */
+  gap:clamp(20px,4vw,40px);
+  overflow:visible;
+}
+
+/* Skift side på hvert 2. item så billedet står skiftevis venstre/højre */
+.case-item:nth-child(even){
+  justify-content:flex-end;                /* flyt billedblokken mod højre */
+}
+
+/* Billedet */
+.case-item__media{ flex:0 0 62%; position:relative; } /* lidt smallere */
+.case-item__media img{
+  width:100%;
+  height:clamp(240px,40vw,420px);
+  object-fit:cover;
+  border-radius:16px;
+  box-shadow:0 10px 26px rgba(0,0,0,.15);
+}
+
+/* -------- Overlay ---------- */
+.case-item__overlay{
+  /* nemme “tuning”-variabler */
+  --overlay-out: 58%;                      
+  --nudge-x: 0%;                           
+  --nudge-y: 0px;                          
+
+  position:absolute;
+  top:50%;
+  right:calc(var(--overlay-out) * -1);     /* anker i højre kant */
+  transform:translate(var(--nudge-x), calc(-50% + var(--nudge-y)));
+  width:min(720px,70%);
+  max-width:760px;
+  padding:clamp(14px,2.2vw,22px);
+  border-radius:16px;
+  background:linear-gradient(180deg,
+    color-mix(in oklab, var(--secondary-bg) 94%, transparent),
+    color-mix(in oklab, var(--secondary-bg) 98%, transparent));
+  border:1px solid var(--panel-border);
+  box-shadow:var(--shadow);
+  color:var(--text-dark);
+  z-index:2;
+}
+
+/* Lige cases -> anker i venstre kant og samme udstik */
+.case-item:nth-child(even) .case-item__overlay{
+  left:calc(var(--overlay-out) * -1);
+  right:auto;
+  transform:translate(var(--nudge-x), calc(-50% + var(--nudge-y)));
+}
+
+/* Tekst */
+.case-item__overlay h3 {
+  margin: 0 0 0.35rem;
+  font-size: clamp(18px, 1.8vw, 26px); 
+  letter-spacing: -0.01em;
+  font-weight: 700;                   
+}
+
+.case-item__overlay p {
+  margin: 0 0 0.5rem;
+  color: var(--text-light);
+  line-height: 1.55;
+  font-size: clamp(15px, 1vw, 17px);   
+}
+
+.case-item__overlay .meta {
+  color: var(--muted);
+  font-size: clamp(13px, 0.9vw, 15px); 
+  margin-bottom: 0.3rem;
+}
+.case-item__overlay .link{ font-weight:600; color:var(--cta-color); text-decoration:underline; text-underline-offset:3px; }
+.case-item__overlay .link:hover{ color:var(--cta-hover); }
+
+
+.case-item:nth-child(odd){ margin-top: 0; }
+.case-item:nth-child(even){ margin-top: clamp(-8px, -1vw, -16px); }
+
+/* Mobil: overlay under billedet, ingen overlap */
+@media (max-width: 799px){
+  .case-item{ flex-direction:column; align-items:center; }
+  .case-item__media{ flex:1 1 100%; }
+  .case-item__overlay{
+    position:static; left:auto; right:auto;
+    width:100%; max-width:none; margin-top:-8px;
+    transform:none;
+  }
+}
+
+/* Dark theme */
+html[data-theme="dark"] .case-item__overlay{
+  background:linear-gradient(180deg,
+    color-mix(in oklab, var(--secondary-bg) 85%, transparent),
+    color-mix(in oklab, var(--secondary-bg) 92%, transparent));
+  border-color:color-mix(in oklab, var(--outline) 80%, transparent);
+  box-shadow:0 12px 36px rgba(0,0,0,.6);
+}
